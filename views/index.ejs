@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notepad</title>
+   
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcbLu8i4scniRBOi6V-6CmdsC3d-kt1CnkUg&s">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/stylesheet/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-white-100">
+
+    <!-- Fixed Header -->
+    <header class="bg-gray-800 text-white fixed top-0 left-0 w-full h-16 flex items-center justify-between px-6 z-50">
+        <div class="text-xl font-bold flex items-center">
+            <i class="fas fa-sticky-note w-6 h-6 mr-2"></i> Notepad App
+        </div>
+        <div class="hidden md:flex space-x-4 items-center">
+            <form action="/search" method="GET" class="flex items-center">
+                <input type="text" name="query" class="border border-gray-300 rounded-lg py-2 px-4 mr-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Search files">
+                <button type="submit" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 transition duration-200 ease-in-out flex items-center">
+                    <i class="fas fa-search mr-2"></i>
+                    Search
+                </button>
+            </form>
+        </div>
+        <div class="md:hidden">
+            <button id="menu-button" class="text-white">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="flex pt-16 h-screen">
+        <!-- Sidebar Container -->
+        <div class="fixed top-0 left-0 z-40 w-64 h-screen bg-gray-800 text-white transition-transform transform -translate-x-full md:translate-x-0">
+            <div id="sidebar" class="p-5">
+                <nav>
+                    <ul>
+                        <li class="mb-4"><a href="#home" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-home mr-2"></i>Home</a></li>
+                        <li class="mb-4"><a href="#AddNote" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-sticky-note mr-2"></i>Add-Files</a></li>
+                        <li class="mb-4"><a href="#viewnote" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-file-alt mr-2"></i>View-Files</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-20 overflow-y-auto ml-64">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="home">
+                <div class="p-10 rounded mt-4">
+                    <h1 class="text-3xl font-bold mb-4">Note App</h1>
+                    <p class="text-yellow-500 font-bold mb-4">Where Inspiration meets organization</p>
+                    <p class="text-blue-500 font-bold mb-4">Capture, thought, ideas unlock with creativity with ease</p>
+                    <a href="#AddNote" class="flex items-center text-blue-500 font-semibold  rounded hover:text-blue-600 transition duration-200 ease-in-out mb-4">
+                        <button class="bg-blue-500 text-white font-semibold py-2 px-4 rounded shadow-md hover:bg-blue-500 transition duration-200 ease-in-out flex items-center">
+                            <span class="mr-2">Add Notes</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </a>
+                </div>
+                <div class="p-2 rounded">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfKHAQfwd78csiNWN7yJgBE2blsom56zC_g1PhKZCf7G3Kvtod6N4hW1NUtlYvaFwwMg8&usqp=CAU" alt="Notepad Image" class="w-full h-auto rounded">
+                </div>
+            </div>
+
+            <div class="Section w-full min-h-screen text-dark mt-4 py-4 flex-1">
+                <form action="/create" method="post" class="min-h-screen w-full mt-5 mb-4" id="AddNote">
+                    <div class="form px-10 py-10">
+                        <input class="block px-5 py-2 bg-custom-input text-dark w-full mb-4 rounded-md" type="text" placeholder="title" name="title">
+                        <textarea class="block px-5 py-2 resize-none bg-custom-textarea mt-2 w-full mb-4 rounded-md" placeholder="Write Your text details here" name="details"></textarea>
+                        <input class="mt-2 bg-custom-submit text-white py-2 px-4 rounded mb-4" type="submit" value="Create Task">
+                    </div>
+                    <div class="tasks-container px-10 flex gap-3 flex-wrap space-x-4">
+                        <% if (files.length > 0) { %>
+                            <% files.forEach(function(val) { %>
+                                <div class="task w-60 px-3 py-4 bg-custom-task rounded-md" id="viewnote">
+                                    <p class="text-2xl tracking-tighter mb-4 mt-3 "><%= val %></p>
+                                    <a class="text-blue-500 mt-3 " href="/files/<%= val %>">Read More</a>
+                                </div>
+                            <% }) %>
+                        <% } else { %>
+                            <h3 class="bg-custom-task px-4 py-2">No Tasks Yet</h3>
+                        <% } %>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+        document.getElementById('menu-button').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('-translate-x-full');
+        });
+    </script>
+</body>
+</html>

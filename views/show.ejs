@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notepad</title>
+   
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcbLu8i4scniRBOi6V-6CmdsC3d-kt1CnkUg&s">
+   
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/stylesheet/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-white-100">
+
+    <header class="bg-gray-800 text-white fixed top-0 left-0 w-full h-16 flex items-center justify-between px-6 z-50">
+        <div class="text-xl font-bold flex items-center">
+            <i class="fas fa-sticky-note w-6 h-6 mr-2"></i> Notepad
+        </div>
+        <div class="hidden md:flex space-x-4 items-center ">
+            <form action="/search" method="GET" class="flex items-center">
+                <input type="text" name="query" class="border border-gray-300 rounded-lg py-2 px-4 mr-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Search files">
+                <button type="submit" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 transition duration-200 ease-in-out flex items-center">
+                    <i class="fas fa-search mr-2"></i>
+                    Search
+                </button>
+            </form>
+        </div>
+        <div class="md:hidden">
+            <button id="menu-button" class="text-white">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="flex pt-16 h-screen">
+        <!-- Sidebar -->
+        <div id="sidebar" class="sticky top-0 bg-gray-800 text-white h-screen p-5 left-0 transition-transform transform -translate-x-full md:translate-x-0 md:relative md:w-64">
+            <nav>
+                <ul>
+                 
+                    <li class="mb-4"><a href="#viewnote" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-cog mr-2"></i>View-Note</a></li>
+                  
+                </ul>
+            </nav>
+        </div>
+    
+        <div class="flex-1 p-20 overflow-y-auto" id="viewnote">
+            <div class="grid grid-cols-1 gap-4">
+                <div class="p-10 rounded mt-4 bg-gray-100 shadow-lg">
+                    <h1 class="text-3xl font-bold mb-4 text-yellow-500"><%= filename %></h1>
+                    <p class="text-blue-500 font-bold mb-4"><%= filedata %></p>
+                    <a href="/" class="flex items-center text-blue-500 font-semibold  rounded hover:text-blue-600 transition duration-200 ease-in-out mb-4">
+                       Go to back
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+        document.getElementById('menu-button').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('-translate-x-full');
+        });
+    </script>
+</body>
+</html>
+

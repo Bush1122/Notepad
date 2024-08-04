@@ -1,0 +1,68 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: white;
+}
+
+/* Custom input background color and styling */
+.bg-custom-input {
+    background-color: #f0f0f0; /* Light gray */
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.bg-custom-input:focus {
+    background-color: #e0e0e0;
+    border-color: #888;
+    outline: none;
+}
+
+/* Custom textarea background color and styling */
+.bg-custom-textarea {
+    background-color: #f0f0f0; /* Light gray */
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.bg-custom-textarea:focus {
+    background-color: #e0e0e0;
+    border-color: #888;
+    outline: none;
+}
+
+/* Custom submit button styling */
+.bg-custom-submit {
+    background-color: #007bff; /* Bootstrap primary color */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.bg-custom-submit:hover {
+    background-color: #0056b3; /* Darker shade of blue */
+}
+
+.bg-custom-task{
+    background-color: #e0e0e0;
+    border-color: #888;
+    outline: none;
+    color :black;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+
+.bg-custom-task:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */}
+    
+
+
